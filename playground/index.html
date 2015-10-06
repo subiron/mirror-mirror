@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mirror mirror on the wall...</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//js.leapmotion.com/leap-0.6.4.js"></script>
+  <script src="//js.leapmotion.com/leap-plugins-0.1.11.js"></script>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <style>
+  body {
+    background-color: #000000;
+}
+  #draggable { width: 150px; height: 150px; padding: 0.5em; color:white; background-color:black;}
+  
+  #output { background-color: #AAAAAA; width: 150px; height: 150px; padding: 0.5em; }
+  </style>
+  <script>
+  $(function() {
+    $( "#draggable" ).draggable();
+  });
+  
+  
+  
+  
+var jqxhr = $.ajax( "http://api.openweathermap.org/data/2.5/weather?q=Poznan&mode=html" )
+  .done(function(data) {
+   // alert( "success" );
+  })
+  .fail(function(data) {
+    alert( "error" );
+  })
+  .always(function(data) {
+    $( "#draggable" ).html(data);
+  });  
+  </script>
+</head>
+<body>
+ 
+<div id="draggable" class="ui-widget-content">
+  <p>Drag me around</p>
+  
+  
+  
+</div>
+ 
+ <div id=output></div>
+
+ 
+ 
+<script>
+  var output = document.getElementById('output');
+  Leap.loop(function (frame) {
+    output.innerHTML = 'Frame: ' + frame.id;
+  });
+  
+  var loadSettings=function(){
+		alert(localStorage.getItem("lastname")); 
+  }
+  var saveSettings=function(){
+		localStorage.setItem("lastname", "tomasz");
+		alert('saved');
+  }
+  
+  
+  
+  
+</script>
+<button type="button" onclick="saveSettings()">save settings</button> 
+<button type="button" onclick="loadSettings()">load settings</button> 
+</body>
+
+</html>
